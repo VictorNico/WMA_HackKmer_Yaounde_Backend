@@ -1,0 +1,46 @@
+{
+  "name": "wiki-lex-match",
+  "version": "1.0.0",
+  "description": "The API for wiki-lex-match",
+  "main": "main.js",
+  "lint-staged": {
+    "src/**/*.ts": [
+      "npm run format"
+    ]
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "node ./dist/main.js",
+    "dev": "npx nodemon",
+    "build": "rm -rf ./dist && npx tsc",
+    "format": "npx prettier --config ./.prettierrc.json --write ./src",
+    "format:check": "npx prettier --config ./.prettierrc.json --check ./src",
+    "prepare": "npx husky install",
+    "pre-commit": "npx lint-staged"
+  },
+  "keywords": [
+    "wikimedia",
+    "lex-match",
+    "wiki-lex-match",
+    "wikicommon",
+    "wikidata"
+  ],
+  "author": "Wiki mentor Africa Cameroon - Yaounde",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.2.0",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "lint-staged": "^15.2.5",
+    "prettier": "^3.3.3"
+  }
+}

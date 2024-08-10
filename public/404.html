@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="wiki-lex-match">
+
+  <meta property="og:title" content="wiki-lex-match<">
+  <meta property="og:description"
+    content="The API for wiki-lex-match, by Wiki mentor Africa Cameroon - Yaounde developer at rebase-code-camp">
+  <meta property="og:site_name" content="wiki-lex-match">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="wiki-lex-match">
+  <meta name="twitter:description"
+    content="The API for wiki-lex-match, by Wiki mentor Africa Cameroon - Yaounde developer at rebase-code-camp">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <title>wiki-lex-match - 404 route</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body class="">
+  <main class="min-h-screen flex flex-col items-center justify-center gap-3">
+    <div class="flex items-center justify-center gap-2">
+      <h1 class="font-semibold text-[2rem] md:text-[3.4rem] lg:text-[5rem] text-blue-500">
+        404
+      </h1>
+
+      <div class="w-fit flex flex-col items-start justify-start gap-1">
+        <p class="text-sm text-gray-400 w-fit">
+          Route not found
+        </p>
+
+        <a href="/" class="bg-slate-900 rounded px-8 py-3 text-white cursor-pointer">
+          Home
+        </a>
+      </div>
+    </div>
+
+    <p class="text-gray-400">
+      cannot Get route:
+
+      <span id="route" class="text-red-500"></span>
+    </p>
+  </main>
+
+</body>
+
+<script defer>
+  document.getElementById("route").innerHTML = window.location.toString();
+</script>
+
+</html>
