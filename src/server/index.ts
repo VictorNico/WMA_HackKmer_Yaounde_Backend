@@ -1,7 +1,4 @@
 import express, { type Application } from "express";
-import { authRouter } from "../routes/auth-router";
-import { languageRouter } from "../routes/language-router";
-import { matchRouter } from "../routes/match-router";
 import path from "path";
 import cors, { type CorsOptions } from "cors";
 
@@ -26,9 +23,8 @@ export default async (app: Application) => {
       .sendFile(path.join(__dirname, "../../public/api-docs/index.html"));
   });
 
-  app.use("/auth", authRouter);
-  app.use("/languages", languageRouter);
-  app.use("/match/publish", matchRouter);
+  app.use("/api/v1/", (await import("../api/v1")).default);
+  app.use("/api/v2/", (await import("../api/v2")).default);
 
   app.get("/health", (_, res) => {
     res.status(200).json({
