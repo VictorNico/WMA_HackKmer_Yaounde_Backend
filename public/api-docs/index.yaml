@@ -11,7 +11,7 @@ servers:
     description: local server
 
 paths:
-  /Languages:
+  /languages:
     get:
       summary: "Retrieve a list of languages"
       description: "Returns a list of language codes and labels available in the system."
@@ -90,7 +90,7 @@ paths:
         '500':
           description: "Server error"
 
-  /login:
+  auth/login:
     post:
       summary: "User login"
       description: "Logs in a user and returns an authentication token."
@@ -165,14 +165,45 @@ components:
     PublishMatchResponse:
       type: object
       properties:
-        message:
-          type: string
-          example: "Match published successfully."
         matchId:
           type: string
+          description: "The unique identifier of the newly created match."
           example: "M12345"
+        formId:
+          type: string
+          description: "The unique identifier of the form that was matched."
+          example: "12345"
+        audioFilename:
+          type: string
+          description: "The filename or path of the audio file that was matched."
+          example: "audio_example.mp3"
+        username:
+          type: string
+          description: "The username of the user who published the match."
+          example: "john_doe"
+        publishedAt:
+          type: string
+          format: date-time
+          description: "The timestamp when the match was published."
+          example: "2024-08-11T14:32:00Z"
+      required:
+        - matchId
+        - formId
+        - audioFilename
+        - username
+        - publishedAt
 
     LoginRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        tokenType:
+          type: string
+          example: "Bearer"
+
+    LoginResponse:
       type: object
       properties:
         username:
@@ -182,13 +213,4 @@ components:
           type: string
           format: password
           example: "password123"
-
-    LoginResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-        tokenType:
-          type: string
-          example: "Bearer"
+    
