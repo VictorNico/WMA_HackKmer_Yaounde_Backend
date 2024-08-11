@@ -3,9 +3,27 @@ import { LanguageService } from "./language.service";
 
 import  axios from "axios"
 
-interface resAPI{
-  batchcomplete : Object;
 
+interface LanguageInfo {
+  code: string;
+  name: string;
+  autonym: string;
+}
+
+interface ApiResponse {
+  batchcomplete: string;
+  query: {
+    languageinfo: {
+      [key: string]: {
+        code: string;
+        bcp47: string;
+        dir: string;
+        autonym: string;
+        name: string;
+        variants: string[];
+      };
+    };
+  };
 }
 
 export class LanguageController {
@@ -15,81 +33,46 @@ export class LanguageController {
     this.languageService = new LanguageService();
   }
 
-endpoint : string = "https://commons.wikimedia.org/w/api.php";
+//endpoint : string = "https://commons.wikimedia.org/w/api.php";
 //let parties = this.endpoint.split(":");
 //console.log(this->parties.length > 1 ? parties[1] : undefined);
 
 //?format=json&action=query&list=categorymembers&cmtitle=Category:Lingua_Libre_pronunciation&cmlimit=500"
 
-getAllLanguageList: RequestHandler = async (req, res) => {
+getAllLanguageList: RequestHandler = async (req, res) =>   {
+  try {
+    const response = await axios.get<ApiResponse>('https://commons.wikimedia.org/w/api.php', {
+      params: {
+        action: 'query',
+        meta: 'languageinfo',
+        liprop: 'code|name|autonym',
+        format: 'json',
+      },
+    });
 
-  try{
-
-    const response =  await axios.get(this.endpoint, {
-      
-    params: {
-      format: 'json',
-      action: 'query',
-      list: 'categorymembers',
-      cmtitle : 'Category:Lingua_Libre_pronunciation',
-      cmlimit : 500,
-      //...req.query
-    }});
- 
-
-    interface CategoryMemeber{
-      pageid: number,
-      ns: number,
-      title: string
-    }
-
-    interface Qresults {
-      categorymembers: CategoryMemeber[]
-    }
-    
-    interface APIres{
-      batchcomplete: string,
-      query : Qresults
-    }
-
-    const PreResponse : APIres = response.data
-
-    const tabLanguage = PreResponse['query']['categorymembers']
-
-    const finalLanguage:string[] = []
-
-    tabLanguage.forEach(element =>{
-      const split_tab = element['title'].split("-")
-      if(split_tab.length > 1){
-        if(split_tab[1].length ==3){
-          finalLanguage.push(split_tab[1])
-        }
-        
+    const languages = response.data.query.languageinfo;
+    const filteredLanguages: object[] = [];
+    //console.log(languages);
+    for (const [code, info] of Object.entries(languages)) {
+      //console.log(info);
+      let label:string = info.autonym
+      if(info.autonym === ""){
+        //console.log("object");
+        label = info.name 
       }
-    })
+      //console.log(label);
 
-    res.json({'languages' : finalLanguage});
+      filteredLanguages.push({"code": info.code,
+            "name": label,
+        })
+        
+    }
 
-    
-
-
-    //console.log(preRec["query"]);
-    
-    
-
-
-    return res.status(200); 
-    //console.log(response.data);
-    /*
-    return res.status(200).json({
-      message: "return languages",
-    });*/
-
-    }catch(error){
-      res.status(500).json({
-        message: "server error -> return languages",
-      });
-    };
-    
-  };
+    res.json(filteredLanguages);
+  } catch (error) {
+    console.error('Error fetching language info:', error);
+    res.status(500).json({ error: 'An error occurred while fetching language information' });
+  }
+};
 }
+
