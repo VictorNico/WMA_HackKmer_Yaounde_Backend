@@ -66,7 +66,7 @@ getAllLanguageList: RequestHandler = async (req, res) =>   {
             "name": label,
         })
         
-    }
+    } 
 
     res.json(filteredLanguages);
   } catch (error) {
