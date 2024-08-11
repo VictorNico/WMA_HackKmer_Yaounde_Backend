@@ -11,8 +11,10 @@
   "scripts": {
     "test": "jest",
     "start": "node ./dist/main.js",
-    "dev": "npx nodemon",
-    "build": "rm -rf ./dist && npx tsc",
+    "build": "npm run build:docs && rm -rf ./dist && npx tsc",
+    "dev": "npm run build:docs && npx nodemon",
+    "watch:docs": "npx @redocly/cli preview-docs ./public/api-docs/index.yaml --port=8081",
+    "build:docs": "npx @redocly/cli build-docs ./public/api-docs/index.yaml --output ./public/api-docs/index.html",
     "format": "npx prettier --config ./.prettierrc.json --write ./src",
     "format:check": "npx prettier --config ./.prettierrc.json --check ./src",
     "prepare": "npx husky install",
@@ -27,6 +29,13 @@
   ],
   "author": "Wiki mentor Africa Cameroon - Yaounde",
   "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "lint-staged": "^15.2.5",
+    "prettier": "^3.3.3"
+  },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.0",
@@ -35,12 +44,5 @@
     "nodemon": "^3.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "lint-staged": "^15.2.5",
-    "prettier": "^3.3.3"
   }
 }

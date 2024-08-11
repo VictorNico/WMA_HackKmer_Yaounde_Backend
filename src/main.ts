@@ -11,7 +11,7 @@ import { APP_CONF } from "./config/app-config";
     .then(() =>
       app.listen(PORT, () =>
         console.log(
-          `\nserver listening on ${env === "dev" ? "http://localhost:" : "port "}${PORT}`
+          `\nserver listening on ${env === "dev" ? "http://localhost:" : "port "}${PORT}\n`
         )
       )
     )

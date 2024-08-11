@@ -20,6 +20,12 @@ export default async (app: Application) => {
       .sendFile(path.join(__dirname, "../../public/main.html"));
   });
 
+  app.get("/api-docs", (_, res) => {
+    return res
+      .status(200)
+      .sendFile(path.join(__dirname, "../../public/api-docs/index.html"));
+  });
+
   app.use("/auth", authRouter);
   app.use("/languages", languageRouter);
   app.use("/match", matchRouter);
