@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: wiki-lex-match API
+  description: The API for wiki-lex-match, by Wiki mentor Africa Cameroon - Yaounde developer at rebase-code-camp.
+  version: 1.0.0
+  license:
+    name: MIT
+    url: "https://opensource.org/license/mit/"
+servers:
+  - url: http://localhost:8080
+    description: local server
+
+# paths:
+#   /:
+#     # define route paths
+
+# components:
+#   schemas:
+#     # Define any reusable components or schemas
