@@ -13,6 +13,6 @@ routerV1.get("/", (_, res) => {
 
 routerV1.use("/auth", authRouter);
 routerV1.use("/languages", languageRouter);
-routerV1.use("/match/publish", matchRouter);
+routerV1.use("/match", matchRouter);
 
 export default routerV1;

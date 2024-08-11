@@ -5,6 +5,6 @@ const router = Router();
 
 const matchController = new MatchController();
 
-router.post("/", matchController.processMatch);
+router.post("/publish", matchController.processMatch);
 
 export const matchRouter = router;
