@@ -7,4 +7,8 @@ const languageController = new LanguageController();
 
 router.get("/", languageController.getAllLanguageList.bind(languageController));
 
+
+
+
+
 export const languageRouter = router;
