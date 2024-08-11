@@ -1,6 +1,6 @@
 # wiki-lex-match
 
-__table of content__
+**table of content**
 
 - [local setup](#setup-repo-locally)
 - [how to render the](#how-to-render-the-documentation)
@@ -9,7 +9,7 @@ __table of content__
 ## setup repo locally
 
 - Clone repo with
-  
+
   ```bash
     git clone git@github.com:Wikidata-Cameroon/WMA_HackKmer_Yaounde_Backend.git wiki-lex-match-backend
   ```
@@ -20,27 +20,48 @@ __table of content__
     cd wiki-lex-match-backend
   ```
 
+- Run the following command on your terminal to install packages and dependencies with npm
+
+  ```bash
+    npm install
+    # or npm i for short
+  ```
+
+### Note
+
+- If you do not have node or npm installed to your machine, download and install the runtime from [node](https://nodejs.org/en/download/package-manager)
+
 ## How to start server
 
 - Start local server in watch mode
 
-    ```bash
-      npm run dev
-    ```
+  ```bash
+    npm run dev
+  ```
 
-- Build to js
+- Generate Project Build
 
-    ```bash
-      npm run build
-    ```
+  ```bash
+    npm run build
+  ```
+
+- Visit API locally through
+
+  ```bash
+    http://localhost/8080
+
+    # You can navigate to API version 1 (the current latest version)
+    http://localhost/8080/api/v1
+  ```
 
 ## Contributing
 
-- __Git flow__
+- **Git flow**
 
   - Branches should be name with `feature/<task>` format
 
   - Writing commits
+
     - Commit messages should follow the for mat `#<issue_number> | <author_name> | <work_description>`
 
     - @example is `"|#1 | @rashjredmund | installed express and configured base project template. setup hustky, prettier, and eslint. also updated readme file"`
@@ -59,8 +80,8 @@ __table of content__
 
   - Always assign the PR to yourself and your team-mate
 
-- __Building__
-  
+- **Building**
+
   - Navigate to `src/modules/<your_module_of_concern>` to start contributing
 
   - Set up your routes in the `src/route/*` directory in the right file or add one if need be
@@ -69,6 +90,6 @@ __table of content__
 
 |
 
-___
+---
 
-__Happy Coding Everyone 🚀__
+**Happy Coding Everyone 🚀**
