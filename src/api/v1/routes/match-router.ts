@@ -5,7 +5,6 @@ const router = Router();
 
 const matchController = new MatchController();
 
-router.get("/", matchController.list.bind(matchController));
-router.post("/match/publish", matchController.processMatch);
+router.post("/", matchController.processMatch);
 
 export const matchRouter = router;

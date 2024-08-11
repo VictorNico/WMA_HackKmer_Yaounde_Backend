@@ -8,15 +8,15 @@ export class MatchController {
     this.matchService = new MatchService();
   }
 
-  list: RequestHandler = (req, res) => {
-    return res.status(200).json({
-      message: "return dictionaries",
-    });
-  };
+  public processMatch: RequestHandler = async (req, res) => {
+    const { id, label } = req.body;
 
-  processMatch: RequestHandler = async (req, res) => {
-    const { id } = req.body;
-    const { label } = req.body;
+    // Validate the parameters
+    if (!id || !label) {
+      return res
+        .status(400)
+        .json({ error: "Missing required parameters: id and label" });
+    }
 
     try {
       const result = await this.matchService.processMatch(id, label);
@@ -24,5 +24,11 @@ export class MatchController {
     } catch (error: any) {
       return res.status(500).json({ error: error.message });
     }
+  };
+
+  public list: RequestHandler = (req, res) => {
+    return res.status(200).json({
+      message: "return dictionaries",
+    });
   };
 }

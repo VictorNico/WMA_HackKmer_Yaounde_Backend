@@ -2,9 +2,6 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 const API_BASE_URL = "https://www.wikidata.org/w/api.php";
-interface ClientRequestBody {
-  label: string;
-}
 
 interface ClaimRequest {
   id: string;
@@ -32,15 +29,7 @@ export class MatchService {
     this.token = "your_token_here"; // user token
   }
 
-  private checkParams(params: any[]): boolean {
-    return params.every((param) => param);
-  }
-
   public async processMatch(id: string, label: string): Promise<any> {
-    if (!this.checkParams([id, label, this.token])) {
-      throw new Error("Missing required parameters");
-    }
-
     try {
       const claimData = await this.setClaim(id, label);
 
@@ -48,7 +37,7 @@ export class MatchService {
         throw new Error("ID does not match the claim");
       }
 
-      const claimIdWithUUID = `${claimData.claim.id}-${uuidv4()}`;
+      const claimIdWithUUID = `${claimData.claim.id}$${uuidv4()}`;
 
       const qualifierData = await this.addQualifier(claimIdWithUUID);
 
