@@ -30,11 +30,14 @@
   "author": "Wiki mentor Africa Cameroon - Yaounde",
   "license": "ISC",
   "dependencies": {
+    "@types/uuid": "^10.0.0",
+    "axios": "^1.7.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "lint-staged": "^15.2.5",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

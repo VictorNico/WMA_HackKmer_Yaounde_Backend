@@ -13,4 +13,16 @@ export class MatchController {
       message: "return dictionaries",
     });
   };
+
+  processMatch: RequestHandler = async (req, res) => {
+    const { id } = req.body;
+    const { label } = req.body;
+
+    try {
+      const result = await this.matchService.processMatch(id, label);
+      return res.status(200).json(result);
+    } catch (error: any) {
+      return res.status(500).json({ error: error.message });
+    }
+  };
 }

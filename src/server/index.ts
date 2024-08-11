@@ -28,7 +28,7 @@ export default async (app: Application) => {
 
   app.use("/auth", authRouter);
   app.use("/languages", languageRouter);
-  app.use("/match", matchRouter);
+  app.use("/match/publish", matchRouter);
 
   app.get("/health", (_, res) => {
     res.status(200).json({
