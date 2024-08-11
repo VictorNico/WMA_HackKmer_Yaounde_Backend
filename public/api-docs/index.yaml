@@ -7,13 +7,188 @@ info:
     name: MIT
     url: "https://opensource.org/license/mit/"
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8080/api/v1
     description: local server
 
-# paths:
-#   /:
-#     # define route paths
+paths:
+  /Languages:
+    get:
+      summary: "Retrieve a list of languages"
+      description: "Returns a list of language codes and labels available in the system."
+      responses:
+        '200':
+          description: "A list of languages"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Language'
+              examples:
+                english:
+                  summary: "Example - English"
+                  value:
+                    - languageCode: "en"
+                      languageLabel: "English"
+                spanish:
+                  summary: "Example - Spanish"
+                  value:
+                    - languageCode: "es"
+                      languageLabel: "Spanish"
+                french:
+                  summary: "Example - French"
+                  value:
+                    - languageCode: "fr"
+                      languageLabel: "French"
+                german:
+                  summary: "Example - German"
+                  value:
+                    - languageCode: "de"
+                      languageLabel: "German"
+        '400':
+          description: "Invalid input"
+        '500':
+          description: "Server error"
 
-# components:
-#   schemas:
-#     # Define any reusable components or schemas
+  /match/list:
+    get:
+      summary: "Retrieve a list of matched pronunciation audios"
+      description: "Returns a list of matches between forms and audio files."
+      responses:
+        '200':
+          description: "A list of matches"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Match'
+        '400':
+          description: "Invalid input"
+        '500':
+          description: "Server error"
+
+  /match/publish:
+    post:
+      summary: "Publish a match between a form and an audio file"
+      description: "Creates a new match between a form and an audio file, along with the user who published it."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMatchRequest'
+      responses:
+        '201':
+          description: "Match published successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishMatchResponse'
+        '400':
+          description: "Invalid input"
+        '500':
+          description: "Server error"
+
+  /login:
+    post:
+      summary: "User login"
+      description: "Logs in a user and returns an authentication token."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: "Login successful"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: "Unauthorized"
+        '500':
+          description: "Server error"
+
+components:
+  schemas:
+    Language:
+      type: object
+      properties:
+        languageCode:
+          type: string
+          example: "en"
+        languageLabel:
+          type: string
+          example: "English"
+
+    Match:
+      type: object
+      properties:
+        linkToAudioFile:
+          type: string
+          format: uri
+          example: "https://commons.wikimedia.org/wiki/File:example.ogg"
+        forms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Form'
+
+    Form:
+      type: object
+      properties:
+        formId:
+          type: string
+          example: "L12345"
+        label:
+          type: string
+          example: "cat"
+        description:
+          type: string
+          example: "A small domesticated carnivorous mammal."
+
+    PublishMatchRequest:
+      type: object
+      properties:
+        formId:
+          type: string
+          example: "L12345"
+        audioFilename:
+          type: string
+          example: "cat.ogg"
+        username:
+          type: string
+          example: "johndoe"
+
+    PublishMatchResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Match published successfully."
+        matchId:
+          type: string
+          example: "M12345"
+
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "johndoe"
+        password:
+          type: string
+          format: password
+          example: "password123"
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        tokenType:
+          type: string
+          example: "Bearer"
