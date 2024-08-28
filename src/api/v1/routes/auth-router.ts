@@ -6,5 +6,6 @@ const router = Router();
 const authController = new AuthController();
 
 router.get("/", authController.index.bind(authController));
+router.post("/", authController.index.bind(authController));
 
 export const authRouter = router;

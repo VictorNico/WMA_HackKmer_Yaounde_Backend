@@ -8,9 +8,15 @@ export class AuthController {
     this.authService = new AuthService();
   }
 
-  index: RequestHandler = (req, res) => {
-    return res.status(200).json({
-      message: "Intergrade wikimedia OAuth 1.0a",
-    });
+  index: RequestHandler = async (req, res) => {
+    const { code } = req.body;
+    const accessToken = await this.authService.login(code);
+    console.log("code", code);
+
+    return await res.json(accessToken.body);
+
+    // return res.status(200).json({
+    //   message: "Intergrade wikimedia OAuth 1.0a",
+    // });
   };
 }
