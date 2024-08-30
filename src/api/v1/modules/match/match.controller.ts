@@ -7,7 +7,7 @@ export class MatchController {
   constructor() {
     this.matchService = new MatchService();
   }
-
+  // LIST CONTROL
   list: RequestHandler = async (req: Request, res: Response) => {
     try {
       let langCat: string = req.params.lang;
