@@ -11,7 +11,7 @@ interface WikidataResponse {
     bindings: WikidataResult[];
   };
 }
-
+// Service definition
 export class MatchService {
   private apiFilesUrl: string;
   private apiLexUrl: string;
