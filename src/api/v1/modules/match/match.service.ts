@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { APP_CONF } from "../../../../config/app-config";
-
+// Interfaces
 interface WikidataResult {
   item: { value: string };
   itemLabel: { value: string };
