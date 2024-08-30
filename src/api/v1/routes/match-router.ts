@@ -5,6 +5,6 @@ const router = Router();
 
 const matchController = new MatchController();
 
-router.get("/", matchController.list.bind(matchController));
+router.get("/list/:lang/", matchController.list.bind(matchController));
 
 export const matchRouter = router;
